@@ -27,5 +27,5 @@ export default function useInvoiceState() {
     return result;
   });
 
-  return { invoiceState: state, updateLine, totalHT };
+  return { invoiceState: { ...state }, updateLine, totalHT };
 }
