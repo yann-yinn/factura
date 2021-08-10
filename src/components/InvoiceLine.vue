@@ -55,18 +55,10 @@ export default {
     const { invoiceState, updateLine } = useInvoiceState();
 
     function handleInput(event) {
-      // ex: {amount:777}
+      // example update: { amount:777 }
       updateLine(props.id, { [event.target.name]: event.target.value });
     }
 
-    /*
-    watch(inputs, (values) => {
-      emit("inputsChange", {
-        lineId: props.id,
-        values: { ...values }, // remove reactivity
-      });
-    });
-    */
     return { handleInput, editorId, invoiceState, totalHT };
   },
 };
