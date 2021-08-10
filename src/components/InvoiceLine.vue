@@ -49,13 +49,13 @@ import useInvoiceState from "@/use/invoiceState";
 export default {
   props: ["id", "line"],
   setup(props) {
-    const totalHT = computed(() => props.line.quantity * props.line.amount);
-    const editorId = computed(() => "editor-" + props.id);
     useCkEditor("#" + editorId.value);
     const { invoiceState, updateLine } = useInvoiceState();
 
+    const totalHT = computed(() => props.line.quantity * props.line.amount);
+    const editorId = computed(() => "editor-" + props.id);
+
     function handleInput(event) {
-      // example update: { amount:777 }
       updateLine(props.id, { [event.target.name]: event.target.value });
     }
 
