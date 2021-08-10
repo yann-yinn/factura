@@ -1,5 +1,5 @@
 <template>
-  <tr class="hover:bg-gray-100 border-b-2">
+  <tr class="hover:bg-gray-100 border-b">
     <td class="py-4 px-6 text-left">
       <div :id="editorId" class="prose whitespace-wrap bg-white"></div>
     </td>
@@ -9,7 +9,7 @@
         type="number"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="amount"
+        v-model="inputs.amount"
       />
     </td>
 
@@ -18,7 +18,7 @@
         type="number"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="quantity"
+        v-model="inputs.quantity"
       />
     </td>
 
@@ -27,7 +27,7 @@
         type="text"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="unit"
+        v-model="inputs.unit"
       />
       <!-- <input style="width: 80px" type="number" />-->
     </td>
@@ -39,22 +39,27 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed, reactive, watch } from "vue";
 import useCkEditor from "@/use/ckEditor";
 
 export default {
   props: ["id"],
-  setup(props) {
-    const amount = ref(500);
-    const quantity = ref(1);
-    const unit = ref("jour");
-    const totalHT = computed(() => amount.value * quantity.value);
+  setup(props, { emit }) {
+    const inputs = reactive({
+      amount: 500,
+      quantity: 1,
+      unit: "jour",
+    });
+    const totalHT = computed(() => inputs.amount * inputs.quantity);
     const editorId = computed(() => "editor-" + props.id);
     useCkEditor("#" + editorId.value);
-    function handleChange() {
-      alert("ok");
-    }
-    return { editorId, handleChange, amount, totalHT, quantity, unit };
+    watch(inputs, (values) => {
+      emit("inputsChange", {
+        lineId: props.id,
+        values: { ...values }, // remove reactivity
+      });
+    });
+    return { editorId, inputs, totalHT };
   },
 };
 </script>
