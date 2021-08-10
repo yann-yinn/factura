@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 container max-w-screen-md mx-auto">
+  <div class="mt-10 container max-w-screen-lg mx-auto">
     <h1 class="text-5xl text-gray-700 mb-5">Devis</h1>
     <table class="table-fixed text-left max-w-max">
       <thead>

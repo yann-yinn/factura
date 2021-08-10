@@ -54,7 +54,8 @@ export default {
     useCkEditor("#" + editorId.value);
     const { invoiceState, updateLine } = useInvoiceState();
 
-    function handleInput() {
+    function handleInput(event) {
+      // ex: {amount:777}
       updateLine(props.id, { [event.target.name]: event.target.value });
     }
 
