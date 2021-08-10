@@ -1,33 +1,42 @@
 <template>
-  <tr class="hover:bg-gray-100 border-b-2">
-    <td class="py-3 px-6 text-left">
-      <div :id="editorId" class="prose"></div>
+  <tr class="hover:bg-gray-100">
+    <td class="py-4 px-6 text-left">
+      <div :id="editorId" class="prose whitespace-wrap bg-white"></div>
     </td>
 
     <td class="py-3 px-6 text-left">
-      <div contenteditable="">500</div>
+      <div contenteditable>edit</div>
     </td>
 
     <td class="py-3 px-6 text-left">
-      <div contenteditable>jour</div>
+      <div contenteditable>edit</div>
     </td>
 
     <td class="py-3 px-6 text-left">
-      <div contenteditable>10</div>
+      <div contenteditable>edit</div>
+      <!-- <input style="width: 80px" type="number" />-->
+    </td>
+
+    <td class="py-3 px-6 text-left">
+      <div></div>
     </td>
   </tr>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import useCkEditor from "@/use/ckEditor";
 
 export default {
   props: ["id"],
   setup(props) {
+    const amount = ref(500);
     const editorId = computed(() => "editor-" + props.id);
     useCkEditor("#" + editorId.value);
-    return { editorId };
+    function handleChange() {
+      alert("ok");
+    }
+    return { editorId, handleChange, amount };
   },
 };
 </script>
