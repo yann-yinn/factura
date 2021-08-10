@@ -3,13 +3,8 @@ import { onMounted } from "vue";
 
 export default function useCkEditor(selector) {
   onMounted(() => {
-    ckEditor
-      .create(document.querySelector(selector))
-      .then((editor) => {
-        window.editor = editor;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    ckEditor.create(document.querySelector(selector)).catch((error) => {
+      console.error(error);
+    });
   });
 }
