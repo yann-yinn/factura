@@ -4,11 +4,11 @@
       <div :id="editorId" class="prose whitespace-wrap bg-white"></div>
     </td>
 
-    <td class="npy-3 px-6 text-left">
+    <td class="py-3 px-6 text-left">
       <input
         type="number"
         name="amount"
-        style="width: 100px"
+        style="width: 70px"
         class="py-3 px-2"
         :value="line.amount"
         @input="handleInput"
@@ -18,7 +18,7 @@
     <td class="py-3 px-6 text-left">
       <input
         type="number"
-        style="width: 100px"
+        style="width: 70px"
         class="py-3 px-2"
         name="quantity"
         :value="line.quantity"
@@ -29,7 +29,7 @@
     <td class="py-3 px-6 text-left">
       <input
         type="text"
-        style="width: 100px"
+        style="width: 70px"
         class="py-3 px-2"
         :value="line.unit"
         name="unit"

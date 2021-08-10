@@ -4,11 +4,11 @@
     <table class="table-fixed text-left max-w-max">
       <thead>
         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-          <th class="py-3 px-6 w-1/2">Désignation</th>
+          <th class="py-1 px-6 w-1/2">Désignation</th>
           <th class="py-3 px-6">Prix unitaire</th>
-          <th class="py-3 px-6">Quantité</th>
-          <th class="py-3 px-6">Unité</th>
-          <th class="py-3 px-6">Montant HT</th>
+          <th class="py-1 px-6">Quantité</th>
+          <th class="py-1 px-6">Unité</th>
+          <th class="py-1 px-6">Montant HT</th>
         </tr>
       </thead>
       <tbody class="text-gray-700">
@@ -19,9 +19,9 @@
           :key="i"
         />
         <tr>
-          <td colspan="3"></td>
-          <td class="py-3 px-6">Total HT</td>
-          <td class="py-3 px-6">
+          <td class="py-6 px-6" colspan="3"></td>
+          <td class="py-6 px-6 text-xp">Total HT</td>
+          <td class="py-6 px-6 text-xl">
             <strong>{{ totalHT }} €</strong>
           </td>
         </tr>
