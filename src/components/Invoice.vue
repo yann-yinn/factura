@@ -12,13 +12,18 @@
         </tr>
       </thead>
       <tbody class="text-gray-700">
-        <InvoiceLine :id="1" @inputsChange="inputsChange" />
-        <InvoiceLine :id="2" @inputsChange="inputsChange" />
-        <InvoiceLine :id="3" @inputsChange="inputsChange" />
+        <InvoiceLine
+          v-for="(line, i) in invoiceState.lines"
+          :line="line"
+          :id="i"
+          :key="i"
+        />
         <tr>
           <td colspan="3"></td>
-          <td class="py-3 px-6">Total</td>
-          <td class="py-3 px-6">xxx</td>
+          <td class="py-3 px-6">Total HT</td>
+          <td class="py-3 px-6">
+            <strong>{{ totalHT }} €</strong>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -26,28 +31,13 @@
 </template>
 
 <script>
-import { reactive } from "vue";
 import InvoiceLine from "@/components/InvoiceLine";
+import useInvoiceState from "@/use/invoiceState";
 export default {
   components: { InvoiceLine },
   setup() {
-    const invoiceState = reactive({
-      lines: [],
-      metaLines: [],
-    });
-    function inputsChange({ lineId, values }) {
-      // console.log("invoice: lineId ${lineId } changed: ", { lineId, values });
-      const existingLine = invoiceState.lines.filter((v) => {
-        console.log("v", v);
-        return v.lineId == lineId;
-      });
-
-      console.log("existingLine", existingLine);
-      if (existingLine.length > 0) {
-        invoiceState.lines.push({ lineId, values });
-      }
-    }
-    return { inputsChange, invoiceState };
+    const { invoiceState, totalHT } = useInvoiceState();
+    return { invoiceState, totalHT };
   },
 };
 </script>

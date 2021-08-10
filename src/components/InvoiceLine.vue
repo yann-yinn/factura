@@ -7,9 +7,11 @@
     <td class="npy-3 px-6 text-left">
       <input
         type="number"
+        name="amount"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="inputs.amount"
+        :value="line.amount"
+        @input="handleInput"
       />
     </td>
 
@@ -18,7 +20,9 @@
         type="number"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="inputs.quantity"
+        name="quantity"
+        :value="line.quantity"
+        @input="handleInput"
       />
     </td>
 
@@ -27,39 +31,42 @@
         type="text"
         style="width: 100px"
         class="py-3 px-2"
-        v-model="inputs.unit"
+        :value="line.unit"
+        name="unit"
+        @input="handleInput"
       />
-      <!-- <input style="width: 80px" type="number" />-->
     </td>
 
-    <td class="py-3 px-6 text-left">
-      {{ totalHT }}
-    </td>
+    <td class="py-3 px-6 text-left">{{ totalHT }} €</td>
   </tr>
 </template>
 
 <script>
-import { computed, reactive, watch } from "vue";
+import { computed } from "vue";
 import useCkEditor from "@/use/ckEditor";
+import useInvoiceState from "@/use/invoiceState";
 
 export default {
-  props: ["id"],
-  setup(props, { emit }) {
-    const inputs = reactive({
-      amount: 500,
-      quantity: 1,
-      unit: "jour",
-    });
-    const totalHT = computed(() => inputs.amount * inputs.quantity);
+  props: ["id", "line"],
+  setup(props) {
+    const totalHT = computed(() => props.line.quantity * props.line.amount);
     const editorId = computed(() => "editor-" + props.id);
     useCkEditor("#" + editorId.value);
+    const { invoiceState, updateLine } = useInvoiceState();
+
+    function handleInput() {
+      updateLine(props.id, { [event.target.name]: event.target.value });
+    }
+
+    /*
     watch(inputs, (values) => {
       emit("inputsChange", {
         lineId: props.id,
         values: { ...values }, // remove reactivity
       });
     });
-    return { editorId, inputs, totalHT };
+    */
+    return { handleInput, editorId, invoiceState, totalHT };
   },
 };
 </script>
