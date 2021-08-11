@@ -1,10 +1,10 @@
 <template>
   <tr class="hover:bg-gray-100 border-b">
-    <td class="py-4 px-6 text-left">
+    <td class="text-left py-2 px-2">
       <div :id="editorId" class="prose whitespace-wrap bg-white"></div>
     </td>
 
-    <td class="py-3 px-2 text-left">
+    <td class="text-left py-2">
       <input
         type="number"
         name="amount"
@@ -15,7 +15,7 @@
       />
     </td>
 
-    <td class="py-3 px-2 text-left">
+    <td class="py-2 px-1 text-left">
       <input
         type="number"
         style="width: 70px"
@@ -26,7 +26,7 @@
       />
     </td>
 
-    <td class="py-3 px-2 text-left">
+    <td class="py-2 px-1 text-left">
       <input
         type="text"
         style="width: 70px"
@@ -37,11 +37,11 @@
       />
     </td>
 
-    <td class="py-3 px-2 text-left">
+    <td class="py-2 px-1 text-left">
       <div class="flex items-center">
         <input
-          type="text"
-          style="width: 50px"
+          type="number"
+          style="width: 60px"
           class="py-3 px-2"
           :value="line.tva"
           name="tva"
@@ -51,7 +51,7 @@
       </div>
     </td>
 
-    <td class="py-3 px-2 text-left">{{ totalHT }} €</td>
+    <td class="py-2 px-2 text-right">{{ totalHT }} €</td>
   </tr>
 </template>
 

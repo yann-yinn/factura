@@ -21,24 +21,20 @@
         />
 
         <tr>
-          <td class="py-3 px-2" colspan="4"></td>
-          <td class="py-6 px-6 border-b">Total HT</td>
-          <td class="py-6 px-6 border-b">
-            <strong>{{ totalHT }} €</strong>
-          </td>
+          <td class="py-3 px-2" colspan="3"></td>
+          <td class="py-3 px-6 border-b text-right" colspan="2">Total HT</td>
+          <td class="py-3 px-6 border-b text-right">{{ totals.HT }} €</td>
         </tr>
         <tr>
-          <td class="py-3 px-2" colspan="4"></td>
-          <td class="py-6 px-6 border-b">TVA</td>
-          <td class="py-6 px-6 border-b">
-            <strong>{{ totalTVA }} €</strong>
-          </td>
+          <td class="py-3 px-2" colspan="3"></td>
+          <td class="py-3 px-6 border-b text-right" colspan="2">TVA</td>
+          <td class="py-3 px-6 border-b text-right">{{ totals.TVA }} €</td>
         </tr>
         <tr>
-          <td class="py-3 px-2" colspan="4"></td>
-          <td class="py-6 px-6 text-xl">Total TTC</td>
-          <td class="py-6 px-6 text-xl">
-            <strong>{{ totalTTC }} €</strong>
+          <td class="py-3 px-2 text-right" colspan="3"></td>
+          <td class="py-3 px-6 text-2xl text-right" colspan="2">Total TTC</td>
+          <td class="py-3 px-6 text-2xl text-right">
+            <strong>{{ totals.TTC }}€</strong>
           </td>
         </tr>
       </tbody>
@@ -52,8 +48,8 @@ import useInvoiceState from "@/use/invoiceState";
 export default {
   components: { InvoiceLine },
   setup() {
-    const { invoiceState, totalHT, totalTVA, totalTTC } = useInvoiceState();
-    return { invoiceState, totalHT, totalTVA, totalTTC };
+    const { invoiceState, totals } = useInvoiceState();
+    return { invoiceState, totals };
   },
 };
 </script>

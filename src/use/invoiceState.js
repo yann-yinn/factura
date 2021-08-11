@@ -21,32 +21,23 @@ export default function useInvoiceState() {
     };
   }
 
-  const totalHT = computed(() => {
-    const result = state.lines.reduce((accumulator, line) => {
-      return accumulator + parseFloat(line.amount) * parseFloat(line.quantity);
-    }, 0);
-    return result;
-  });
-
-  const totalTVA = computed(() => {
-    const result = state.lines.reduce((accumulator, line) => {
-      const totalLine = parseFloat(line.amount) * parseFloat(line.quantity);
-      const tva = totalLine * (line.tva / 100);
-      return accumulator + tva;
-    }, 0);
-    console.log("result");
-    return result;
-  });
-
-  const totalTTC = computed(() => {
-    return totalHT.value + totalTVA.value;
+  const totals = computed(() => {
+    let totalHT = 0;
+    let totalTVA = 0;
+    let totalTTC = 0;
+    state.lines.forEach((line) => {
+      const lineAmount = parseFloat(line.amount) * parseFloat(line.quantity);
+      const lineTVA = lineAmount * (line.tva / 100);
+      totalHT += lineAmount;
+      totalTVA += lineTVA;
+    });
+    totalTTC = totalHT + totalTVA;
+    return { HT: totalHT, TVA: totalTVA, TTC: totalTTC };
   });
 
   return {
     invoiceState: { ...state },
     updateLine,
-    totalHT,
-    totalTVA,
-    totalTTC,
+    totals,
   };
 }
