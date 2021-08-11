@@ -7,5 +7,7 @@ La seule particularité c'est que la section "description" de chaque ligne se ve
 ## TODO
 
 - [ ] Recevoir en props les données d'un devis / facture existante
+- [ ] Validation des du formulaire avec VeeValidate
+- [ ] Enlever les options de Ckeditor qui sont inutiles
 - [x] Calculer en temps réel les totaux
 - [x] envoyer les données au clic du bouton sauvegarde
