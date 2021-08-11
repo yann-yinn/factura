@@ -10,7 +10,7 @@ interface totals {
   TTC: number;
 }
 
-interface Line {
+export interface Line {
   description: string;
   quantity: number;
   amount: number;

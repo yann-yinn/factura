@@ -56,9 +56,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import useCkEditor from "@/use/ckEditor";
-import useInvoiceState from "@/use/invoiceState";
+import useInvoiceState, { Line } from "@/use/invoiceState";
 
 export default defineComponent({
   props: {
@@ -67,7 +67,7 @@ export default defineComponent({
       required: true,
     },
     line: {
-      type: Object,
+      type: Object as PropType<Line>,
       required: true,
     },
   },
@@ -84,9 +84,7 @@ export default defineComponent({
       updateLine(props.id, { [event.target.name]: event.target.value });
     }
 
-    const totalHT = computed(
-      () => parseFloat(props.line.quantity) * parseFloat(props.line.amount)
-    );
+    const totalHT = computed(() => props.line.quantity * props.line.amount);
 
     return { handleInput, editorId, invoiceState, totalHT };
   },
