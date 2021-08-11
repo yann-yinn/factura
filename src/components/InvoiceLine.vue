@@ -51,7 +51,7 @@
       </div>
     </td>
 
-    <td class="py-2 px-2 text-right">{{ totalHT }} €</td>
+    <td class="py-2 px-2 text-right">{{ totalHT }}</td>
   </tr>
 </template>
 

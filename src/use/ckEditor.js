@@ -17,7 +17,7 @@ export default function useCkEditor(selector) {
   onBeforeUnmount(() => {
     //on devrait détruire les instances de ckEditor ici, mais
     // ce code créer une erreur
-    editors.map((editor) => editor.destroy());
+    // editors.map((editor) => editor.destroy());
     // console.log("onBeforeUnmount", editors);
   });
 }
