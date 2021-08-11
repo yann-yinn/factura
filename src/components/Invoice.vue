@@ -23,7 +23,7 @@
     </table>
 
     <div class="flex justify-end">
-      <table class="">
+      <table>
         <tbody>
           <tr>
             <td class="py-3 px-6 border-b text-right">Total HT</td>
@@ -42,6 +42,7 @@
         </tbody>
       </table>
     </div>
+
     <div class="flex justify-end mt-5">
       <AppButton @click="onSaveClick" color="indigo"> Sauvegarder </AppButton>
     </div>
@@ -50,9 +51,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import InvoiceLine from "@/components/InvoiceLine";
 import useInvoiceState from "@/use/invoiceState";
-import AppButton from "@/components/AppButton";
+import InvoiceLine from "@/components/InvoiceLine.vue";
+import AppButton from "@/components/AppButton.vue";
 
 export default defineComponent({
   components: { InvoiceLine, AppButton },

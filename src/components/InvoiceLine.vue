@@ -55,19 +55,28 @@
   </tr>
 </template>
 
-<script>
-import { computed } from "vue";
+<script lang="ts">
+import { computed, defineComponent } from "vue";
 import useCkEditor from "@/use/ckEditor";
 import useInvoiceState from "@/use/invoiceState";
 
-export default {
-  props: ["id", "line"],
+export default defineComponent({
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    line: {
+      type: Object,
+      required: true,
+    },
+  },
   setup(props) {
     const editorId = computed(() => "editor-" + props.id);
     useCkEditor("#" + editorId.value, { onChange: onEditorChange });
     const { invoiceState, updateLine } = useInvoiceState();
 
-    function onEditorChange(value) {
+    function onEditorChange(value: string) {
       updateLine(props.id, { description: value });
     }
 
@@ -81,5 +90,5 @@ export default {
 
     return { handleInput, editorId, invoiceState, totalHT };
   },
-};
+});
 </script>

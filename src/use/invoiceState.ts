@@ -18,6 +18,12 @@ interface Line {
   tva: number;
 }
 
+interface useInvoiceStateReturn {
+  invoiceState: state;
+  totals: ComputedRef<totals>;
+  updateLine: Function;
+}
+
 function defaultLine(): Line {
   return {
     description: "",
@@ -28,13 +34,7 @@ function defaultLine(): Line {
   };
 }
 
-interface useInvoiceStateReturn {
-  invoiceState: state;
-  totals: ComputedRef<totals>;
-  updateLine: Function;
-}
-
-const state: state = reactive({
+const state = reactive({
   lines: [defaultLine(), defaultLine()],
 });
 
@@ -61,7 +61,7 @@ export default function useInvoiceState(): useInvoiceStateReturn {
   });
 
   return {
-    invoiceState: { ...state },
+    invoiceState: state,
     updateLine,
     totals,
   };
