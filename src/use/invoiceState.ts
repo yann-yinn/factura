@@ -4,7 +4,15 @@ const state = reactive({
   lines: [defaultLine(), defaultLine()],
 });
 
-function defaultLine() {
+interface Line {
+  description: string;
+  quantity: number;
+  amount: number;
+  unit: string;
+  tva: number;
+}
+
+function defaultLine(): Line {
   return {
     description: "",
     quantity: 1,
@@ -26,8 +34,8 @@ export default function useInvoiceState() {
     let totalHT = 0;
     let totalTVA = 0;
     let totalTTC = 0;
-    state.lines.forEach((line) => {
-      const lineAmount = parseFloat(line.amount) * parseFloat(line.quantity);
+    state.lines.forEach((line: Line) => {
+      const lineAmount: number = line.amount * line.quantity;
       const lineTVA = lineAmount * (line.tva / 100);
       totalHT += lineAmount;
       totalTVA += lineTVA;

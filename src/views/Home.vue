@@ -1,15 +1,17 @@
 <template>
-  <Invoice />
+  <div class="home">
+    <Invoice />
+  </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import Invoice from "@/components/Invoice.vue";
+<script lang="ts">
+import { defineComponent } from "vue";
+import Invoice from "@/components/Invoice.vue"; // @ is an alias to /src
 
-export default {
+export default defineComponent({
   name: "Home",
   components: {
     Invoice,
   },
-};
+});
 </script>
