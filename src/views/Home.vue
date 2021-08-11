@@ -1,7 +1,5 @@
 <template>
-  <div class="container mx-auto bg-white shadow-sm">
-    <Invoice />
-  </div>
+  <Invoice />
 </template>
 
 <script>

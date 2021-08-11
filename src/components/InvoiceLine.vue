@@ -4,7 +4,7 @@
       <div :id="editorId" class="prose whitespace-wrap bg-white"></div>
     </td>
 
-    <td class="py-3 px-6 text-left">
+    <td class="py-3 px-2 text-left">
       <input
         type="number"
         name="amount"
@@ -15,7 +15,7 @@
       />
     </td>
 
-    <td class="py-3 px-6 text-left">
+    <td class="py-3 px-2 text-left">
       <input
         type="number"
         style="width: 70px"
@@ -26,7 +26,7 @@
       />
     </td>
 
-    <td class="py-3 px-6 text-left">
+    <td class="py-3 px-2 text-left">
       <input
         type="text"
         style="width: 70px"
@@ -37,7 +37,21 @@
       />
     </td>
 
-    <td class="py-3 px-6 text-left">{{ totalHT }} €</td>
+    <td class="py-3 px-2 text-left">
+      <div class="flex items-center">
+        <input
+          type="text"
+          style="width: 50px"
+          class="py-3 px-2"
+          :value="line.tva"
+          name="tva"
+          @input="handleInput"
+        />
+        %
+      </div>
+    </td>
+
+    <td class="py-3 px-2 text-left">{{ totalHT }} €</td>
   </tr>
 </template>
 

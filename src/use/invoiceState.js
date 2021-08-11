@@ -1,16 +1,17 @@
 import { computed, reactive } from "vue";
 
+const state = reactive({
+  lines: [defaultLine(), defaultLine()],
+});
+
 function defaultLine() {
   return {
     quantity: 1,
     amount: 500,
     unit: "jour",
+    tva: 0,
   };
 }
-
-const state = reactive({
-  lines: [defaultLine(), defaultLine()],
-});
 
 export default function useInvoiceState() {
   function updateLine(id, update) {
@@ -27,5 +28,25 @@ export default function useInvoiceState() {
     return result;
   });
 
-  return { invoiceState: { ...state }, updateLine, totalHT };
+  const totalTVA = computed(() => {
+    const result = state.lines.reduce((accumulator, line) => {
+      const totalLine = parseFloat(line.amount) * parseFloat(line.quantity);
+      const tva = totalLine * (line.tva / 100);
+      return accumulator + tva;
+    }, 0);
+    console.log("result");
+    return result;
+  });
+
+  const totalTTC = computed(() => {
+    return totalHT.value + totalTVA.value;
+  });
+
+  return {
+    invoiceState: { ...state },
+    updateLine,
+    totalHT,
+    totalTVA,
+    totalTTC,
+  };
 }

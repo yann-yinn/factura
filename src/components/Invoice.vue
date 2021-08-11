@@ -5,9 +5,10 @@
       <thead>
         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
           <th class="py-1 px-6 w-1/2">Désignation</th>
-          <th class="py-3 px-6">Prix unitaire</th>
+          <th class="py-1 px-6">Prix unitaire</th>
           <th class="py-1 px-6">Quantité</th>
           <th class="py-1 px-6">Unité</th>
+          <th class="py-1 px-6">TVA</th>
           <th class="py-1 px-6">Montant HT</th>
         </tr>
       </thead>
@@ -18,11 +19,26 @@
           :id="i"
           :key="i"
         />
+
         <tr>
-          <td class="py-6 px-6" colspan="3"></td>
-          <td class="py-6 px-6 text-xp">Total HT</td>
-          <td class="py-6 px-6 text-xl">
+          <td class="py-3 px-2" colspan="4"></td>
+          <td class="py-6 px-6 border-b">Total HT</td>
+          <td class="py-6 px-6 border-b">
             <strong>{{ totalHT }} €</strong>
+          </td>
+        </tr>
+        <tr>
+          <td class="py-3 px-2" colspan="4"></td>
+          <td class="py-6 px-6 border-b">TVA</td>
+          <td class="py-6 px-6 border-b">
+            <strong>{{ totalTVA }} €</strong>
+          </td>
+        </tr>
+        <tr>
+          <td class="py-3 px-2" colspan="4"></td>
+          <td class="py-6 px-6 text-xl">Total TTC</td>
+          <td class="py-6 px-6 text-xl">
+            <strong>{{ totalTTC }} €</strong>
           </td>
         </tr>
       </tbody>
@@ -36,8 +52,8 @@ import useInvoiceState from "@/use/invoiceState";
 export default {
   components: { InvoiceLine },
   setup() {
-    const { invoiceState, totalHT } = useInvoiceState();
-    return { invoiceState, totalHT };
+    const { invoiceState, totalHT, totalTVA, totalTTC } = useInvoiceState();
+    return { invoiceState, totalHT, totalTVA, totalTTC };
   },
 };
 </script>
