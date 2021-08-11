@@ -1,8 +1,14 @@
-import { computed, reactive } from "vue";
+import { computed, ComputedRef, reactive } from "vue";
 
-const state = reactive({
-  lines: [defaultLine(), defaultLine()],
-});
+interface state {
+  lines: Line[];
+}
+
+interface totals {
+  HT: number;
+  TVA: number;
+  TTC: number;
+}
 
 interface Line {
   description: string;
@@ -22,15 +28,25 @@ function defaultLine(): Line {
   };
 }
 
-export default function useInvoiceState() {
-  function updateLine(id, update) {
+interface useInvoiceStateReturn {
+  invoiceState: state;
+  totals: ComputedRef<totals>;
+  updateLine: Function;
+}
+
+const state: state = reactive({
+  lines: [defaultLine(), defaultLine()],
+});
+
+export default function useInvoiceState(): useInvoiceStateReturn {
+  function updateLine(id: string, update: Line): void {
     state.lines[id] = {
       ...state.lines[id],
       ...update,
     };
   }
 
-  const totals = computed(() => {
+  const totals = computed((): totals => {
     let totalHT = 0;
     let totalTVA = 0;
     let totalTTC = 0;

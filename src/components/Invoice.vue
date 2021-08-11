@@ -48,12 +48,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import InvoiceLine from "@/components/InvoiceLine";
 import useInvoiceState from "@/use/invoiceState";
 import AppButton from "@/components/AppButton";
 
-export default {
+export default defineComponent({
   components: { InvoiceLine, AppButton },
   setup() {
     const { invoiceState, totals } = useInvoiceState();
@@ -71,5 +72,5 @@ export default {
     }
     return { invoiceState, totals, onSaveClick };
   },
-};
+});
 </script>
