@@ -6,6 +6,7 @@ const state = reactive({
 
 function defaultLine() {
   return {
+    description: "",
     quantity: 1,
     amount: 500,
     unit: "jour",

@@ -1,23 +1,18 @@
 import ckEditor from "@ckeditor/ckeditor5-build-balloon";
-import { onBeforeUnmount, onMounted } from "vue";
+import { onMounted } from "vue";
 
-let editors = [];
-
-export default function useCkEditor(selector) {
+export default function useCkEditor(
+  selector,
+  { onEditorReady = null, onChange = null }
+) {
   onMounted(() => {
-    ckEditor
-      .create(document.querySelector(selector))
-      .then((editor) => {
-        editors.push(editor);
-      })
-      .catch((error) => {
-        console.error(error);
+    ckEditor.create(document.querySelector(selector)).then((editor) => {
+      if (onEditorReady) {
+        onEditorReady(editor);
+      }
+      editor.model.document.on("change:data", () => {
+        onChange(editor.getData());
       });
-  });
-  onBeforeUnmount(() => {
-    //on devrait détruire les instances de ckEditor ici, mais
-    // ce code créer une erreur
-    // editors.map((editor) => editor.destroy());
-    // console.log("onBeforeUnmount", editors);
+    });
   });
 }

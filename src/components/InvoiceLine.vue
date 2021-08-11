@@ -64,14 +64,20 @@ export default {
   props: ["id", "line"],
   setup(props) {
     const editorId = computed(() => "editor-" + props.id);
-    useCkEditor("#" + editorId.value);
+    useCkEditor("#" + editorId.value, { onChange: onEditorChange });
     const { invoiceState, updateLine } = useInvoiceState();
 
-    const totalHT = computed(() => props.line.quantity * props.line.amount);
+    function onEditorChange(value) {
+      updateLine(props.id, { description: value });
+    }
 
     function handleInput(event) {
       updateLine(props.id, { [event.target.name]: event.target.value });
     }
+
+    const totalHT = computed(
+      () => parseFloat(props.line.quantity) * parseFloat(props.line.amount)
+    );
 
     return { handleInput, editorId, invoiceState, totalHT };
   },

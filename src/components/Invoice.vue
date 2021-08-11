@@ -19,37 +19,57 @@
           :id="i"
           :key="i"
         />
-
-        <tr>
-          <td class="py-3 px-2" colspan="3"></td>
-          <td class="py-3 px-6 border-b text-right" colspan="2">Total HT</td>
-          <td class="py-3 px-6 border-b text-right">{{ totals.HT }} €</td>
-        </tr>
-        <tr>
-          <td class="py-3 px-2" colspan="3"></td>
-          <td class="py-3 px-6 border-b text-right" colspan="2">TVA</td>
-          <td class="py-3 px-6 border-b text-right">{{ totals.TVA }} €</td>
-        </tr>
-        <tr>
-          <td class="py-3 px-2 text-right" colspan="3"></td>
-          <td class="py-3 px-6 text-2xl text-right" colspan="2">Total TTC</td>
-          <td class="py-3 px-6 text-2xl text-right">
-            <strong>{{ totals.TTC }}€</strong>
-          </td>
-        </tr>
       </tbody>
     </table>
+
+    <div class="flex justify-end">
+      <table class="">
+        <tbody>
+          <tr>
+            <td class="py-3 px-6 border-b text-right">Total HT</td>
+            <td class="py-3 px-6 border-b text-right">{{ totals.HT }}</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-6 border-b text-right">TVA</td>
+            <td class="py-3 px-6 border-b text-right">{{ totals.TVA }}</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-6 text-2xl text-right">Total TTC</td>
+            <td class="py-3 px-6 text-2xl text-right">
+              <strong>{{ totals.TTC }}€</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex justify-end mt-5">
+      <AppButton @click="onSaveClick" color="indigo"> Sauvegarder </AppButton>
+    </div>
   </div>
 </template>
 
 <script>
 import InvoiceLine from "@/components/InvoiceLine";
 import useInvoiceState from "@/use/invoiceState";
+import AppButton from "@/components/AppButton";
+
 export default {
-  components: { InvoiceLine },
+  components: { InvoiceLine, AppButton },
   setup() {
     const { invoiceState, totals } = useInvoiceState();
-    return { invoiceState, totals };
+    function onSaveClick() {
+      alert(
+        JSON.stringify({
+          invoiceState,
+          totals: {
+            HT: totals.value.HT,
+            TVA: totals.value.TVA,
+            TTC: totals.value.TTC,
+          },
+        })
+      );
+    }
+    return { invoiceState, totals, onSaveClick };
   },
 };
 </script>
