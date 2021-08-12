@@ -15,12 +15,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+
+enum PropColor {
+  Indigo = "indigo",
+  Blue = "blue",
+  Green = "green",
+  Yellow = "yellow",
+  Purple = "purple",
+  Red = "red",
+}
 
 export default defineComponent({
   props: {
     color: {
-      type: String,
+      type: String as PropType<PropColor>,
       default: "blue",
     },
   },
