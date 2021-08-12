@@ -1,12 +1,23 @@
 import ckEditor from "@ckeditor/ckeditor5-build-balloon";
 import { onMounted } from "vue";
 
-interface useOptions {
-  onEditorReady?: Function;
-  onChange?: Function;
+interface onEditorReady {
+  (editor): void;
 }
 
-export default function useCkEditor(selector, options: useOptions) {
+interface onChange {
+  (content: string): void;
+}
+
+interface useOptions {
+  onEditorReady?: onEditorReady;
+  onChange?: onChange;
+}
+
+export default function useCkEditor(
+  selector: string,
+  options: useOptions
+): void {
   onMounted(() => {
     ckEditor.create(document.querySelector(selector)).then((editor) => {
       if (options.onEditorReady) {

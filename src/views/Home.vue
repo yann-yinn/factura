@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <Invoice />
-  </div>
+  <Invoice />
 </template>
 
 <script lang="ts">
