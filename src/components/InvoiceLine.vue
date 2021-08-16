@@ -58,7 +58,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 import useCkEditor from "@/use/ckEditor";
-import useInvoiceState, { Line } from "@/use/invoiceState";
+import useInvoiceState from "@/use/invoiceState";
+import { Line } from "@/use/invoiceState.types";
 
 export default defineComponent({
   props: {

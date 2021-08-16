@@ -1,30 +1,5 @@
 import { computed, reactive } from "vue";
-
-export interface state {
-  lines: Line[];
-}
-
-export interface totals {
-  HT: number;
-  TVA: number;
-  TTC: number;
-}
-
-export interface Line {
-  description: string;
-  quantity: number;
-  amount: number;
-  unit: string;
-  tva: number;
-}
-
-export interface LineUpdate {
-  description?: string;
-  quantity?: number;
-  amount?: number;
-  unit?: string;
-  tva?: number;
-}
+import { State, Line, Totals, LineUpdate } from "./invoiceState.types";
 
 function defaultLine(): Line {
   return {
@@ -36,7 +11,7 @@ function defaultLine(): Line {
   };
 }
 
-const state = reactive({
+const state: State = reactive({
   lines: [defaultLine(), defaultLine()],
 });
 
@@ -47,7 +22,7 @@ function updateLine(id: number, update: LineUpdate): void {
   };
 }
 
-const totals = computed((): totals => {
+const totals = computed((): Totals => {
   let totalHT = 0;
   let totalTVA = 0;
   let totalTTC = 0;
